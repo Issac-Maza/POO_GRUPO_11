@@ -6,11 +6,15 @@
 package ec.edu.espol.model;
 import ec.edu.espol.util.Util;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -70,8 +74,29 @@ public class Dueno extends Persona{
     }
 
     @Override
-    public void saveFile(String File) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void saveFile(String nomFile) {
+        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile),true))){
+            pw.println(Util.nextID(nomFile)+"|"+this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email );
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public static ArrayList<Dueno> readFromFile(String nomFile) throws FileNotFoundException{
+        ArrayList<Dueno> listad_0 = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea = sc.nextLine();
+                String[] partes = linea.split("\\|");
+                Dueno due = new Dueno(Integer.parseInt(partes[0]), partes[1], partes[2], partes[3], partes[4], partes[5], partes[6]);
+                listad_0.add(due);
+            }
+        }
+        catch(Exception ex){
+                    System.out.println(ex.getMessage());
+
+        }
+        return listad_0;
     }
     
     @Override
