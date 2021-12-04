@@ -5,6 +5,8 @@
  */
 package ec.edu.espol.proyecto;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Eduardo Vasquez
