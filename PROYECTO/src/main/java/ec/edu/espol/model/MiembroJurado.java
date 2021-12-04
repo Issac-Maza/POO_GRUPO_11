@@ -9,27 +9,21 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
  * @author Eduardo Vasquez
  */
-public class MiembroJurado {
-    private int id;
-    private String nombres;
-    private String apellidos;
-    private String telefono;
-    private String email;
+public class MiembroJurado extends Persona {
     private String perfil;
+//    private ArrayList<Evaluacion> evaluaciones;
     
 
     public MiembroJurado(int id, String nombres, String apellidos, String telefono, String email, String perfil) {
-        this.id = id;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.telefono = telefono;
-        this.email = email;
+        super(id,nombres,apellidos,telefono,email);
         this.perfil = perfil;
+//        this.evaluaciones=evaluaciones;
     }
 
     public int getId() {
@@ -56,6 +50,10 @@ public class MiembroJurado {
         return perfil;
     }
 
+//    public ArrayList<Evaluacion> getEvaluaciones() {
+//        return evaluaciones;
+//    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -80,9 +78,13 @@ public class MiembroJurado {
         this.perfil = perfil;
     }
 
+//    public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
+//        this.evaluaciones = evaluaciones;
+//    }
+
     @Override
     public String toString() {
-        return "id: " + id + ", nombres: " + nombres + ", apellidos: " + apellidos + ", telefono: " + telefono + ", email: " + email + ", perfil: " + perfil;
+        return id + "," + nombres + "," + apellidos + "," + telefono + "," + email + "," + perfil;
     }
 
     @Override
@@ -107,5 +109,38 @@ public class MiembroJurado {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
-    } 
+    }
+    
+    public static ArrayList<MiembroJurado> readFile(String nomFile){
+        ArrayList<MiembroJurado> lista=new ArrayList<>();
+        try(Scanner sc=new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea=sc.nextLine();
+                String[] tokens=linea.split(",");
+                MiembroJurado mV=new MiembroJurado(Integer.parseInt(tokens[0]),tokens[1],tokens[2],tokens[3],tokens[4],tokens[5]);
+                lista.add(mV);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+        
+    public static MiembroJurado nextMiembroJ(Scanner sc){
+        System.out.println("id");
+        int id=sc.nextInt();
+        System.out.println("Nombres");
+        String nombres=sc.next();
+        System.out.println("Apellidos");
+        String apellidos=sc.next();
+        System.out.println("Telefono");
+        String telefono=sc.next();
+        System.out.println("email");
+        String email=sc.next();
+        System.out.println("Perfil");
+        String perfil=sc.next();
+        MiembroJurado r=new MiembroJurado(id,nombres,apellidos,telefono,email,perfil);
+        return r;
+    }
 }

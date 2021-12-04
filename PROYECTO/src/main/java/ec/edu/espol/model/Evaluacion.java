@@ -8,6 +8,8 @@ package ec.edu.espol.model;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -70,7 +72,7 @@ public class Evaluacion {
 
     @Override
     public String toString() {
-        return "La nota del jurado " + eMienbroJurado + " para la mascota " + idInscripcion + " en el criterio " + criterio + " es: " + nota;
+        return id + "," + idInscripcion + "," + eMienbroJurado + "," + criterio + "," + nota;
     }
 
     @Override
@@ -95,5 +97,36 @@ public class Evaluacion {
         catch(Exception e){
             System.out.println(e.getMessage());
         } 
+    }
+    
+    public static ArrayList<Evaluacion> readFile(String nomFile){
+        ArrayList<Evaluacion> lista=new ArrayList<>();
+        try(Scanner sc=new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea=sc.nextLine();
+                String[] tokens=linea.split(",");
+                Evaluacion e=new Evaluacion(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Integer.parseInt(tokens[3]),Double.parseDouble(tokens[4]));
+                lista.add(e);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
+        
+    public static Evaluacion nextEvaluacion(Scanner sc){
+        System.out.println("id");
+        int id=sc.nextInt();
+        System.out.println("id de la inscripcion");
+        int idInscripcion=sc.nextInt();
+        System.out.println("email del Jurado");
+        String eMiembroJurado=sc.next();
+        System.out.println("Criterio");
+        int criterio=sc.nextInt();
+        System.out.println("Nota");
+        double nota=sc.nextDouble();
+        Evaluacion r=new Evaluacion(id,idInscripcion,eMiembroJurado,criterio,nota);
+        return r;
     }
 }
