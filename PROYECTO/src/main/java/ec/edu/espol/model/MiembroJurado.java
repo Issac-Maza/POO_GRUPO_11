@@ -17,31 +17,44 @@ import java.util.Scanner;
  */
 public class MiembroJurado extends Persona {
     private String perfil;
-//    private ArrayList<Evaluacion> evaluaciones;
+    private ArrayList<Evaluacion> evaluaciones;
     
 
     public MiembroJurado(int id, String nombres, String apellidos, String telefono, String email, String perfil) {
         super(id,nombres,apellidos,telefono,email);
         this.perfil = perfil;
-//        this.evaluaciones=evaluaciones;
+        this.evaluaciones=new ArrayList<>();
+    }
+    
+    public void addEvaluaciones(){
+        ArrayList<Evaluacion> tEvaluaciones=Evaluacion.readFile("evaluaciones.txt");
+        for(Evaluacion e:tEvaluaciones){
+            if(this.getEmail()==e.getEMienbroJurado())
+                evaluaciones.add(e);
+        }
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public String getNombres() {
         return nombres;
     }
 
+    @Override
     public String getApellidos() {
         return apellidos;
     }
 
+    @Override
     public String getTelefono() {
         return telefono;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
@@ -50,26 +63,31 @@ public class MiembroJurado extends Persona {
         return perfil;
     }
 
-//    public ArrayList<Evaluacion> getEvaluaciones() {
-//        return evaluaciones;
-//    }
+    public ArrayList<Evaluacion> getEvaluaciones() {
+        return evaluaciones;
+    }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
+    @Override
     public void setNombres(String nombres) {
         this.nombres = nombres;
     }
 
+    @Override
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
 
+    @Override
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
@@ -78,9 +96,9 @@ public class MiembroJurado extends Persona {
         this.perfil = perfil;
     }
 
-//    public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
-//        this.evaluaciones = evaluaciones;
-//    }
+    public void setEvaluaciones(ArrayList<Evaluacion> evaluaciones) {
+        this.evaluaciones = evaluaciones;
+    }
 
     @Override
     public String toString() {
@@ -102,8 +120,9 @@ public class MiembroJurado extends Persona {
         return this.id == r.id;
     }
     
-    public void safeFile(String nomFile){
-        try(PrintWriter pw=new PrintWriter(new FileOutputStream(new File(nomFile)))){
+    @Override
+    public void saveFile(String nomFile){
+        try(PrintWriter pw=new PrintWriter(new FileOutputStream(new File(nomFile),true))){
             pw.println(this.toString());
         }
         catch(Exception e){
