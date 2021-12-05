@@ -18,10 +18,10 @@ public class Criterio {
     private int idConcurso;
     private Concurso concurso;
 
-    public Criterio(int id, String descripcion, ArrayList<Evaluacion> evaluaciones, int idConcurso, Concurso concurso) {
+    public Criterio(int id, String descripcion,int idConcurso, Concurso concurso) {
         this.id = id;
         this.descripcion = descripcion;
-        this.evaluaciones = evaluaciones;
+        this.evaluaciones = new ArrayList<>();
         this.idConcurso = idConcurso;
         this.concurso = concurso;
     }
@@ -46,6 +46,46 @@ public class Criterio {
     public Concurso getConcurso() {
         return concurso;
     }
+
+    //##########Setters##########
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setIdConcurso(int idConcurso) {
+        this.idConcurso = idConcurso;
+    }
+
+    public void setConcurso(Concurso concurso) {
+        this.concurso = concurso;
+    }
     
+    public void addEvaluacion(Evaluacion e1){
+        this.evaluaciones.add(e1);
+    }
+    
+    
+    @Override
+    public String toString(){
+        
+        StringBuilder sb = new StringBuilder();
+        for (Evaluacion e : this.evaluaciones){
+            sb.append("Evaluacion ");
+            sb.append(e.getId());
+            sb.append(":<Id de Inscripcion: ");
+            sb.append(e.getIdInscripcion());
+            sb.append(", Miembro de Jurado: ");
+            sb.append(e.getIdMienbroJurado());
+            sb.append(", Nota: ");
+            sb.append(e.getNota());
+            sb.append(">, "); 
+        }
+        
+        return "Criterio "+this.id+" :{Descripcion: "+this.descripcion+", Evaluaciones:["+sb.toString()+"], ID de Concurso: "+this.idConcurso+"}";
+    }
     
 }

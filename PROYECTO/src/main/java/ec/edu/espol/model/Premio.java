@@ -44,6 +44,32 @@ public class Premio {
     public Concurso getConcurso() {
         return concurso;
     }
+
+    //##########Setters##########
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setIdConcurso(int idConcurso) {
+        this.idConcurso = idConcurso;
+    }
+
+    public void setConcurso(Concurso concurso) {
+        this.concurso = concurso;
+    }
     
+    
+    @Override
+    public String toString(){
+        return "Premio{ Id: "+this.id+", Lugar: "+this.lugar+", Descripcion: "+this.descripcion+", Id de Concurso: "+this.idConcurso+", Concurso: "+this.concurso+"}";
+    }
     
 }
