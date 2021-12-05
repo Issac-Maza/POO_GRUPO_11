@@ -11,12 +11,12 @@ import java.util.Scanner;
  *
  * @author Issac Maza
  */
-public abstract class Persona {
-    public int id;
-    public String nombres;
-    public String apellidos;
-    public String telefono;
-    public String email;
+public class Persona {
+    protected int id;
+    protected String nombres;
+    protected String apellidos;
+    protected String telefono;
+    protected String email;
     
     public Persona(int id, String nombres, String apellidos, String telefono, String email){
         this.id = id;
@@ -25,11 +25,11 @@ public abstract class Persona {
         this.telefono = telefono;
         this.email = email;
     }
-    public Persona(int id, String nombres, String apellidos){
-        this.id=id;
-        this.nombres=nombres;
-        this.apellidos=apellidos;
-        
+    public Persona(String nombres, String apellidos, String telefono, String email) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.telefono = telefono;
+        this.email = email;
     }
 
     public void setId(int id) {
@@ -98,7 +98,27 @@ public abstract class Persona {
     
     
     
-    public abstract void saveFile(String File);
+    
+    
+    /**
+     *
+     * @param sc
+     * @return
+     */
+    public static Persona nextPersona(Scanner sc){        
+        String nombres,apellidos,telefono,email;
+               
+        System.out.println("Ingrese el nombre : ");
+        nombres = sc.next();
+        System.out.println("Ingrese el apellido : ");
+        apellidos = sc.next();
+        System.out.println("Ingrese el telefono: ");
+        telefono = sc.next();
+        System.out.println("Ingrese el email: ");
+        email = sc.next();
+        Persona person = new Persona(nombres, apellidos, telefono, email) {};
+        return person;
+    }
 
 }
     
