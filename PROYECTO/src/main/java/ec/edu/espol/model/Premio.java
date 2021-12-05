@@ -11,16 +11,25 @@ package ec.edu.espol.model;
  */
 public class Premio {
     private int id;
-    private int lugar;
+    private String lugar;
     private String descripcion;
     private int idConcurso;
     private Concurso concurso;
+
+    public Premio(int id, String lugar, String descripcion, int idConcurso, Concurso concurso) {
+        this.id = id;
+        this.lugar = lugar;
+        this.descripcion = descripcion;
+        this.idConcurso = idConcurso;
+        this.concurso = concurso;
+    }
+    
 
     public int getId() {
         return id;
     }
 
-    public int getLugar() {
+    public String getLugar() {
         return lugar;
     }
 
