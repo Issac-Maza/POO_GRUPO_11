@@ -79,7 +79,7 @@ public class Criterio {
             sb.append(":<Id de Inscripcion: ");
             sb.append(e.getIdInscripcion());
             sb.append(", Miembro de Jurado: ");
-            sb.append(e.getIdMienbroJurado());
+            sb.append(e.getEMienbroJurado());
             sb.append(", Nota: ");
             sb.append(e.getNota());
             sb.append(">, "); 
