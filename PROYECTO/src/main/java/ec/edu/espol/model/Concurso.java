@@ -24,6 +24,20 @@ public class Concurso {
     private ArrayList<Premio> premios;
     private ArrayList<Criterio> criterios;
 
+    public Concurso(int id, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica, Double costo, ArrayList<Inscripcion> inscripciones, ArrayList<Premio> premios, ArrayList<Criterio> criterios) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.fechaInscripcion = fechaInscripcion;
+        this.fechaCierreInscripcion = fechaCierreInscripcion;
+        this.tematica = tematica;
+        this.costo = costo;
+        this.inscripciones = inscripciones;
+        this.premios = premios;
+        this.criterios = criterios;
+    }
+    
+
     public int getId() {
         return id;
     }

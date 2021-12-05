@@ -18,6 +18,15 @@ public class Criterio {
     private int idConcurso;
     private Concurso concurso;
 
+    public Criterio(int id, String descripcion, ArrayList<Evaluacion> evaluaciones, int idConcurso, Concurso concurso) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.evaluaciones = evaluaciones;
+        this.idConcurso = idConcurso;
+        this.concurso = concurso;
+    }
+    
+
     public int getId() {
         return id;
     }
