@@ -129,6 +129,22 @@ public class Mascota {
         return mascots;
     }
     
+    public static void  saveFile( ArrayList<Mascota> mascotas , String nombre){
+        //en modo append
+        try(PrintWriter pw= new PrintWriter(new FileOutputStream(new File(nombre),true))){
+            for (   Mascota v:  mascotas ){
+                // ejemplo= 1|Tobias|mestiza|perro|2015-01-10|1|2;4;
+                pw.println(v.getId() + "|"+ v.getNombre()+ "|" + v.getRaza() + "|"+ v.getTipo()+ "|"+ v.getFechaNacimiento()+ "|"+ v.getIdDueno());
+                for (Inscripcion m: v.getInscripciones()){
+                    pw.println(m.getId() + ";");
+                }
+            }    
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    Scanner sc= new Scanner(System.in);
+    
     public static Mascota nextMascota(Scanner sc){
         sc.useDelimiter("\n");
         System.out.println("Su id es:");
@@ -207,16 +223,20 @@ public class Mascota {
         }
         return true;
     }
-    
-    public static void  saveFile( ArrayList<Mascota> mascotas , String nombre){
-        try(PrintWriter pw= new PrintWriter(new FileOutputStream(new File(nombre),true))){
-            for (   Mascota buscado:  mascotas ){
-                pw.println(buscado.getId() + "|"+ buscado.getNombre()+ "|" + buscado.getRaza() + "|" + buscado.getTipo()+ "|" + buscado.getFechaNacimiento() + "|" + buscado.getIdDueno());  
-            }    
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+    public static ArrayList<Inscripcion>  GenerarListInscripMascota(String nombre,int id){
+        ArrayList<Inscripcion> mocot=new ArrayList<>();
+        ArrayList<Inscripcion> mocot1= Inscripcion.readFromFile(nombre);
+        
+        for (Inscripcion moscon: mocot1){
+            
+                if (moscon.getIdMascotas()==id){
+                    mocot.add(moscon);
+                }
         }
+        return mocot;
     }
+    
+  
      
     
 }
