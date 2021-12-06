@@ -26,7 +26,7 @@ public class Evaluacion {
     public Evaluacion(int id, String eMiembroJurado, int idInscripcion, int idCriterio, double nota) {
         this.id = id;
         this.idInscripcion = idInscripcion;
-        ArrayList<MiembroJurado> jurados=MiembroJurado.readFromFile("miembroJurado.txt");
+        ArrayList<MiembroJurado> jurados=MiembroJurado.readFromFile("miembroJurados.txt");
         for(MiembroJurado mJ:jurados){
             if(mJ.getEmail() == eMiembroJurado)
                 this.idMiembroJurado = mJ.getId();
