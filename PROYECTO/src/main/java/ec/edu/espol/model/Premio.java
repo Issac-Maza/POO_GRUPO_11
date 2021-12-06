@@ -6,6 +6,10 @@
 package ec.edu.espol.model;
 
 import ec.edu.espol.util.Util;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -106,6 +110,32 @@ public class Premio {
         Premio p=new Premio(id_next,lugar_next,descripcion_next,idConcurso_next,concurso_next);
         return p;
     }
+    
+    //files
+    
+    public void saveFile(String nomFile){
+        try(PrintWriter pw=new PrintWriter(new FileOutputStream(new File(nomFile),true))){
+            pw.println(this.toString());
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    public static ArrayList<Premio> readFromFile(String nomFile){
+        ArrayList<Premio> lista=new ArrayList<>();
+        try(Scanner sc=new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea=sc.nextLine();
+                String[] tokens=linea.split("|");
+                Premio p=new Premio(Integer.parseInt(tokens[0]),tokens[1],tokens[2],Integer.parseInt(tokens[3])),tokens[4];
+                lista.add(p);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return lista;
     
     
 }
