@@ -94,13 +94,11 @@ public class Premio {
         System.out.println("Ingrese el ID del Premio:");
         int id_next=sc.nextInt();
         System.out.println("Ingrese el Lugar de premio:");
-        sc.nextLine();
-        String lugar_next = sc.nextLine();
+        String lugar_next = sc.next();
         System.out.println("Ingrese la descripcion del premio:");
-        String descripcion_next = sc.nextLine();
+        String descripcion_next = sc.next();
         System.out.println("Ingrese la fecha de INICIO de las inscripciones del Concurso:");
         int idConcurso_next = sc.nextInt();
-        sc.nextLine();
         
         Scanner sc1 = new Scanner(System.in);
         Concurso concurso_next = Concurso.nextConcurso(sc1);

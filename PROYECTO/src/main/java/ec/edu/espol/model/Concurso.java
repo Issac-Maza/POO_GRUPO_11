@@ -185,16 +185,15 @@ public class Concurso {
         System.out.println("Ingrese el ID del Concurso:");
         id_next=sc.nextInt();
         System.out.println("Ingrese el nombre del Concurso:");
-        sc.nextLine();
-        nombre_next = sc.nextLine();
+        nombre_next = sc.next();
         System.out.println("Ingrese la fecha en la que ocurrirá el Concurso:");
-        fecha_next = sc.nextLine();
+        fecha_next = sc.next();
         System.out.println("Ingrese la fecha de INICIO de las inscripciones del Concurso:");
-        fechaInscripcion_next = sc.nextLine();
+        fechaInscripcion_next = sc.next();
         System.out.println("Ingrese la fecha de CIERRE de las inscripciones del Concurso:");
-        fechaCierreInscripcion_next = sc.nextLine();
+        fechaCierreInscripcion_next = sc.next();
         System.out.println("Ingrese la tematica del Concurso:");
-        tematica_next = sc.nextLine();
+        tematica_next = sc.next();
         System.out.println("Ingrese el costo del Concurso:");
         costo_next = sc.nextDouble();
         
