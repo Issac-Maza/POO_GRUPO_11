@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -171,22 +172,38 @@ public class Concurso {
         Concurso c=(Concurso)obj;
         return this.id==c.id;
     }
-    //Tengo que Corregir esto
-    public static ArrayList<Concurso> readFromFile(String nomFile){
-        ArrayList<Concurso> lista=new ArrayList<>();
-        try(Scanner sc=new Scanner(new File(nomFile))){
-            while(sc.hasNextLine()){
-                String linea=sc.nextLine();
-                String[] tokens=linea.split("|");
-                Concurso c=new Concurso(Integer.parseInt(tokens[0]),tokens[1],Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3]),Double.parseDouble(tokens[4]));
-                lista.add(e);
-            }
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        return lista;
+    
+    public static Concurso nextConcurso(Scanner sc){
+        int id_next;
+        String nombre_next;
+        String fecha_next;
+        String fechaInscripcion_next;
+        String fechaCierreInscripcion_next;
+        String tematica_next;
+        double costo_next;
+        
+        System.out.println("Ingrese el ID del Concurso:");
+        id_next=sc.nextInt();
+        System.out.println("Ingrese el nombre del Concurso:");
+        sc.nextLine();
+        nombre_next = sc.nextLine();
+        System.out.println("Ingrese la fecha en la que ocurrirá el Concurso:");
+        fecha_next = sc.nextLine();
+        System.out.println("Ingrese la fecha de INICIO de las inscripciones del Concurso:");
+        fechaInscripcion_next = sc.nextLine();
+        System.out.println("Ingrese la fecha de CIERRE de las inscripciones del Concurso:");
+        fechaCierreInscripcion_next = sc.nextLine();
+        System.out.println("Ingrese la tematica del Concurso:");
+        tematica_next = sc.nextLine();
+        System.out.println("Ingrese el costo del Concurso:");
+        costo_next = sc.nextDouble();
+        
+        Concurso concurso_nuevo = new Concurso(id_next,nombre_next,fecha_next,fechaInscripcion_next,fechaCierreInscripcion_next,tematica_next,costo_next);
+        return concurso_nuevo;
     }
+    
+    //Falta el read from file
+    
     
     
 }

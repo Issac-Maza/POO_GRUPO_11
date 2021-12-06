@@ -6,6 +6,7 @@
 package ec.edu.espol.model;
 
 import ec.edu.espol.util.Util;
+import java.util.Scanner;
 
 /**
  *
@@ -90,15 +91,21 @@ public class Premio {
     }
     
     public static Premio nextPremio(Scanner sc){
-        int id=Util.nextID("premios.txt");
-        System.out.println("Lugar:");
-        String lugar=sc.next();
-        System.out.println("Descripcion de premio:");
-        String descripcion=sc.next();
-        System.out.println("Id del Concurso:");
-        int idConcurso=sc.nextInt();
-        //Falta agregar para un concurso
-        Premio p=new Premio(id,lugar,descripcion,idConcurso,concurso);
+        System.out.println("Ingrese el ID del Premio:");
+        int id_next=sc.nextInt();
+        System.out.println("Ingrese el Lugar de premio:");
+        sc.nextLine();
+        String lugar_next = sc.nextLine();
+        System.out.println("Ingrese la descripcion del premio:");
+        String descripcion_next = sc.nextLine();
+        System.out.println("Ingrese la fecha de INICIO de las inscripciones del Concurso:");
+        int idConcurso_next = sc.nextInt();
+        sc.nextLine();
+        
+        Scanner sc1 = new Scanner(System.in);
+        Concurso concurso_next = Concurso.nextConcurso(sc1);
+
+        Premio p=new Premio(id_next,lugar_next,descripcion_next,idConcurso_next,concurso_next);
         return p;
     }
     
