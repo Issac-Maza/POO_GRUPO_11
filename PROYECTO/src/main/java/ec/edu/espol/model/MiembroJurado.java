@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import ec.edu.espol.model.Persona;
 
 /**
  *
@@ -28,38 +29,53 @@ public class MiembroJurado extends Persona {
     }
     
     public void addEvaluaciones(){
+
         ArrayList<Evaluacion> tEvaluaciones=Evaluacion.readFromFile("evaluaciones.txt");
         for(Evaluacion e:tEvaluaciones){
             if(this.id==e.getIdMiembroJurado())
                 evaluaciones.add(e);
+
+      
         }
     }
-
-    @Override
+     @Override
     public int getId() {
         return id;
     }
-
+    
     @Override
     public String getNombres() {
         return nombres;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getApellidos() {
         return apellidos;
     }
 
+   
     @Override
     public String getTelefono() {
         return telefono;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPerfil() {
         return perfil;
     }
@@ -121,7 +137,6 @@ public class MiembroJurado extends Persona {
         return this.id == r.id;
     }
     
-    @Override
     public void saveFile(String nomFile){
         try(PrintWriter pw=new PrintWriter(new FileOutputStream(new File(nomFile),true))){
             pw.println(this.toString());

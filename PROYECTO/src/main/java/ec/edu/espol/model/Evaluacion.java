@@ -43,8 +43,11 @@ public class Evaluacion {
         return idInscripcion;
     }
 
+
+
     public int getIdMiembroJurado() {
         return idMiembroJurado;
+
     }
 
     public int getIdCriterio() {

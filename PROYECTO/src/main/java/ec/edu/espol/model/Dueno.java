@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ec.edu.espol.model.Persona;
 
 /**
  *
@@ -24,17 +25,14 @@ public class Dueno extends Persona{
     private String direccion;
     private ArrayList<Mascota> mascotas;
     
-    public  Dueno(int id, String nombres, String apellidos, String telefono, String email,String direccion, ArrayList<Mascota> mascotas){
+    public  Dueno(int id, String nombres, String apellidos, String telefono, String email,String direccion){
         super(id,nombres,apellidos,telefono,email);
         this.direccion=direccion;
         this.mascotas= new ArrayList<>();
     }
+       
     
-    public Dueno(int id, String nombres, String apellidos, String direccion){
-        super(id,nombres,apellidos);
-        this.direccion = direccion;
-        this.mascotas = new ArrayList<>();
-    }
+   
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
@@ -72,32 +70,6 @@ public class Dueno extends Persona{
     public String getDireccion() {
         return direccion;
     }
-
-    @Override
-    public void saveFile(String nomFile) {
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile),true))){
-            pw.println(Util.nextID(nomFile)+"|"+this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email );
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    
-    public static ArrayList<Dueno> readFromFile(String nomFile) throws FileNotFoundException{
-        ArrayList<Dueno> listad_0 = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(nomFile))){
-            while(sc.hasNextLine()){
-                String linea = sc.nextLine();
-                String[] partes = linea.split("\\|");
-                Dueno due = new Dueno(Integer.parseInt(partes[0]), partes[1], partes[2], partes[3], partes[4], partes[5], partes[6]);
-                listad_0.add(due);
-            }
-        }
-        catch(Exception ex){
-                    System.out.println(ex.getMessage());
-
-        }
-        return listad_0;
-    }
     
     @Override
     public int getId() {
@@ -123,13 +95,88 @@ public class Dueno extends Persona{
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder bui = new StringBuilder();
+        bui.append("Dueño{ id= ");
+        bui.append(this.id);
+        bui.append(", Nombres= ");
+        bui.append(this.nombres);
+        bui.append(", Apellidos= ");
+        bui.append(this.apellidos);
+        bui.append(", Telefono= ");
+        bui.append(this.telefono);
+        bui.append(", Email = ");
+        bui.append(this.email);
+        bui.append(", Direccion= ");
+        bui.append(this.direccion);
+        bui.append(", Macotas= ");
+        for (Mascota masc: this.mascotas){
+            bui.append(masc.toString());
+            if(this.mascotas.size()!=this.mascotas.size()-1)
+                bui.append(";");               
+            }
+        bui.append("]");
+        return bui.toString();
+    }
     
-    public static Dueno nextDueno(Scanner sc, String nomFile ){
-        nomFile = null;
-        int id_0 = Util.nextID(nomFile);
-        String nomb = sc.nextLine();
-        String nomb_0 = sc.nextLine();
-        return null;
+    
+    
+    public static Dueno nextDueno(Scanner sc){
+        sc.useDelimiter("\n");
+        ArrayList<Dueno> lista_d = Dueno.readFromFile("dueño.txt");
+        Persona persona = Persona.nextPersona(sc);
+        int id = lista_d.size()+1;
+        System.out.println("El id es:");
+        System.out.println(id);
+        System.out.println("Ingrese la direccion");
+        String direccion = sc.nextLine();
+        System.out.println("Ingrese el nombres");
+        String nombres = sc.nextLine();
+        System.out.println("Ingrese sus apellidos");
+        String apellidos = sc.nextLine();
+        System.out.println("Ingrese su telefono ya sea movil o fijo");
+        String telefono = sc.nextLine();
+        System.out.println("Ingrese un email");
+        String email = sc.nextLine();
+        Dueno duen = new Dueno(id,direccion,nombres,apellidos,telefono,email);
+        return duen;
+    }
+    
+    public void saveFile(String nomFile) {
+        try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile),true))){
+            pw.println(Util.nextID(nomFile)+"|"+this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email );
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public static ArrayList<Dueno> readFromFile(String nomFile) {
+        ArrayList<Dueno> dueños = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                Dueno dueño = new Dueno(Integer.parseInt(tokens[0]),tokens[1],tokens[2],tokens[3],tokens[4],tokens[5]);
+                dueños.add(dueño);
+            }
+        }
+        catch(Exception ex){
+                    System.out.println(ex.getMessage());
+
+        }
+        return dueños;
+    }
+    
+    public static void  saveFile( ArrayList<Dueno> dueño , String nombres){
+        try(PrintWriter pw= new PrintWriter(new FileOutputStream(new File(nombres),true))){
+            for (Dueno d:  dueño ){
+                pw.println(d.getId() + "|"+ d.getNombres()+ "|" + d.getApellidos() + "|"+ d.getTelefono()+ "|" + d.getEmail()+ "|"+ d.getDireccion());
+            } 
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     
     
