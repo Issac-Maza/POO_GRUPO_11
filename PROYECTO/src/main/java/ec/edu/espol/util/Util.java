@@ -33,7 +33,7 @@ public class Util {
         {
            while(sc.hasNextLine())
            {
-               String linea = sc.nextLine();
+               String linea = sc.next();
                String[] tokens = linea.split("\\|");
                id = Integer.parseInt(tokens[0]);
            }
@@ -46,7 +46,8 @@ public class Util {
     
     public static int next_Idmascota(Scanner sc){
     System.out.println("Nombre de la mascota: ");
-    String nombre_mascota = sc.nextLine();
+    String nombre_mascota = sc.next();
+    
     ArrayList<Mascota> mascotas = Mascota.readFromFile("concursos.txt");
     for (Mascota m: mascotas){
         if (nombre_mascota.equals(m.getNombre())){
@@ -59,7 +60,8 @@ public class Util {
     public static Dueno nextDuenoe(Scanner sc){
         
         System.out.println("Ingrese un correo electrocino de un dueño existente: ");
-        String email = sc.nextLine();
+        String email = sc.next();
+        
         ArrayList<Dueno> duenos = Dueno.readFromFile("duenos.txt");
         for (Dueno duenito: duenos){
             if (email.equals(duenito.getEmail())){
