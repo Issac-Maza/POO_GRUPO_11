@@ -5,8 +5,11 @@
  */
 package ec.edu.espol.model;
 
+import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -15,21 +18,23 @@ import java.util.Date;
 public class Concurso {
     private int id;
     private String nombre;
-    private Date fecha;
-    private Date fechaInscripcion;
-    private Date fechaCierreInscripcion;
+    private LocalDate fecha;
+    private LocalDate fechaInscripcion;
+    private LocalDate fechaCierreInscripcion;
     private String tematica;
     private Double costo;
     private ArrayList<Inscripcion> inscripciones;
     private ArrayList<Premio> premios;
     private ArrayList<Criterio> criterios;
 
-    public Concurso(int id, String nombre, Date fecha, Date fechaInscripcion, Date fechaCierreInscripcion, String tematica, Double costo) {
+    public Concurso(int id, String nombre, String fecha, String fechaInscripcion, String fechaCierreInscripcion, String tematica, Double costo) {
         this.id = id;
         this.nombre = nombre;
-        this.fecha = fecha;
-        this.fechaInscripcion = fechaInscripcion;
-        this.fechaCierreInscripcion = fechaCierreInscripcion;
+        
+        this.fecha = LocalDate.parse(fecha);
+        this.fechaInscripcion = LocalDate.parse(fechaInscripcion);
+        this.fechaCierreInscripcion = LocalDate.parse(fechaCierreInscripcion);
+        
         this.tematica = tematica;
         this.costo = costo;
         this.inscripciones = new ArrayList<>();
@@ -46,15 +51,15 @@ public class Concurso {
         return nombre;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public Date getFechaInscripcion() {
+    public LocalDate getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public Date getFechaCierreInscripcion() {
+    public LocalDate getFechaCierreInscripcion() {
         return fechaCierreInscripcion;
     }
 
@@ -93,7 +98,21 @@ public class Concurso {
     }
 
     public void setCosto(Double costo) {
-        this.costo = costo;
+        if (costo>=0){
+            this.costo=costo;
+        }
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = LocalDate.parse(fecha);
+    }
+
+    public void setFechaInscripcion(String fechaInscripcion) {
+        this.fechaInscripcion = LocalDate.parse(fechaInscripcion);
+    }
+
+    public void setFechaCierreInscripcion(String fechaCierreInscripcion) {
+        this.fechaCierreInscripcion = LocalDate.parse(fechaCierreInscripcion);
     }
     
     public void addInscripcion(Inscripcion i1){
@@ -136,7 +155,37 @@ public class Concurso {
             sb_criterio.append(",");
         }
         
-        return "Concurso "+this.id+" :{Nombre: "+this.nombre+", Fecha: "+this.fecha+", Fecha de inscripcion: "+this.fechaInscripcion+", Fecha de cierre de inscripcion: "+this.fechaCierreInscripcion+", Tematica: "+this.tematica+", Costo de Inscripcion: "+this.costo+", Inscripciones:["+sb.toString()+"], Premios:["+sb_premio.toString()+"], Criterios:["+sb_criterio.toString()+"]}";
+        return "Concurso "+this.id+" :{Nombre: "+this.nombre+", Fecha: "+this.fecha+", Fecha de inscripcion: [desde: "+this.fechaInscripcion+", hasta: "+this.fechaCierreInscripcion+"], Tematica: "+this.tematica+", Costo de Inscripcion: "+this.costo+", Inscripciones:["+sb.toString()+"], Premios:["+sb_premio.toString()+"], Criterios:["+sb_criterio.toString()+"]}";
+    }
+    
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Concurso c=(Concurso)obj;
+        return this.id==c.id;
+    }
+    //Tengo que Corregir esto
+    public static ArrayList<Concurso> readFromFile(String nomFile){
+        ArrayList<Concurso> lista=new ArrayList<>();
+        try(Scanner sc=new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea=sc.nextLine();
+                String[] tokens=linea.split("|");
+                Concurso c=new Concurso(Integer.parseInt(tokens[0]),tokens[1],Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3]),Double.parseDouble(tokens[4]));
+                lista.add(e);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return lista;
     }
     
     

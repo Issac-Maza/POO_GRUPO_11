@@ -88,4 +88,19 @@ public class Criterio {
         return "Criterio "+this.id+" :{Descripcion: "+this.descripcion+", Evaluaciones:["+sb.toString()+"], ID de Concurso: "+this.idConcurso+"}";
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Criterio c=(Criterio)obj;
+        return this.id==c.id;
+    }
+    
 }

@@ -5,6 +5,8 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
+
 /**
  *
  * @author ROMMEL ZAMORA
@@ -71,5 +73,34 @@ public class Premio {
     public String toString(){
         return "Premio{ Id: "+this.id+", Lugar: "+this.lugar+", Descripcion: "+this.descripcion+", Id de Concurso: "+this.idConcurso+", Concurso: "+this.concurso+"}";
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+        Premio p=(Premio)obj;
+        return this.id==p.id;
+    }
+    
+    public static Premio nextPremio(Scanner sc){
+        int id=Util.nextID("premios.txt");
+        System.out.println("Lugar:");
+        String lugar=sc.next();
+        System.out.println("Descripcion de premio:");
+        String descripcion=sc.next();
+        System.out.println("Id del Concurso:");
+        int idConcurso=sc.nextInt();
+        //Falta agregar para un concurso
+        Premio p=new Premio(id,lugar,descripcion,idConcurso,concurso);
+        return p;
+    }
+    
     
 }
