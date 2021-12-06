@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -27,9 +28,9 @@ public class MiembroJurado extends Persona {
     }
     
     public void addEvaluaciones(){
-        ArrayList<Evaluacion> tEvaluaciones=Evaluacion.readFile("evaluaciones.txt");
+        ArrayList<Evaluacion> tEvaluaciones=Evaluacion.readFromFile("evaluaciones.txt");
         for(Evaluacion e:tEvaluaciones){
-            if(this.getEmail()==e.getEMienbroJurado())
+            if(this.id==e.getIdMiembroJurado())
                 evaluaciones.add(e);
         }
     }
@@ -102,7 +103,7 @@ public class MiembroJurado extends Persona {
 
     @Override
     public String toString() {
-        return id + "," + nombres + "," + apellidos + "," + telefono + "," + email + "," + perfil;
+        return id + "|" + nombres + "|" + apellidos + "|" + telefono + "|" + email + "|" + perfil;
     }
 
     @Override
@@ -130,7 +131,7 @@ public class MiembroJurado extends Persona {
         }
     }
     
-    public static ArrayList<MiembroJurado> readFile(String nomFile){
+    public static ArrayList<MiembroJurado> readFromFile(String nomFile){
         ArrayList<MiembroJurado> lista=new ArrayList<>();
         try(Scanner sc=new Scanner(new File(nomFile))){
             while(sc.hasNextLine()){
@@ -147,8 +148,7 @@ public class MiembroJurado extends Persona {
     }
         
     public static MiembroJurado nextMiembroJ(Scanner sc){
-        System.out.println("id");
-        int id=sc.nextInt();
+        int id=Util.nextID("miembroJurados.txt");
         System.out.println("Nombres");
         String nombres=sc.next();
         System.out.println("Apellidos");
