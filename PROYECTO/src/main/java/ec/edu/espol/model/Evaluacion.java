@@ -38,7 +38,7 @@ public class Evaluacion {
         return idInscripcion;
     }
 
-    public String getIdMienbroJurado() {
+    public String getEMienbroJurado() {
         return eMienbroJurado;
     }
 
@@ -91,7 +91,7 @@ public class Evaluacion {
     }
     
     public void saveFile(String nomFile){
-        try(PrintWriter pw=new PrintWriter(new FileOutputStream(new File(nomFile)))){
+        try(PrintWriter pw=new PrintWriter(new FileOutputStream(new File(nomFile),true))){
             pw.println(this.toString());
         }
         catch(Exception e){
