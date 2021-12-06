@@ -146,10 +146,8 @@ public class Mascota {
     }
     
     public static void  saveFile( ArrayList<Mascota> mascotas , String nombre){
-        //en modo append
         try(PrintWriter pw= new PrintWriter(new FileOutputStream(new File(nombre),true))){
             for (   Mascota v:  mascotas ){
-                // ejemplo= 1|Tobias|mestiza|perro|2015-01-10|1|2;4;
                 pw.println(v.getId() + "|"+ v.getNombre()+ "|" + v.getRaza() + "|"+ v.getTipo()+ "|"+ v.getFechaNacimiento()+ "|"+ v.getIdDueno());
                 for (Inscripcion m: v.getInscripciones()){
                     pw.println(m.getId() + ";");
@@ -177,7 +175,6 @@ public class Mascota {
    
     
     public static Mascota nextMascota(Scanner sc){
-        //ArrayList<Mascota> listmascotas = Mascota.readFromFile("mascotas.txt");
         sc.useDelimiter("\n");
         //int id = listmascotas.size() + 1;
         System.out.println("Su id es:");
@@ -185,13 +182,13 @@ public class Mascota {
         System.out.println(id);
         
         System.out.println("Nombre de la mascota:");
-        String nombre = sc.nextLine();
+        String nombre = sc.next();
         
         System.out.println("Ingrese la raza de su mascota : ");
-        String raza = sc.nextLine();
+        String raza = sc.next();
         
         System.out.println("Tipo de mascota(gato,perro,cocdrilo,serpiente,etc): ");
-        String tipo = sc.nextLine();
+        String tipo = sc.next();
         
         System.out.println("Ingrese la fecha de nacimiento de su mascota");
         System.out.println("Recuerde que la fecha esta en este formato year-month-day ");
