@@ -22,7 +22,7 @@ public class Criterio {
     private int idConcurso;
     private Concurso concurso;
 
-    public Criterio(int id, String descripcion,int idConcurso, Concurso concurso) {
+    public Criterio(int id, String descripcion,int idConcurso) {
         this.id = id;
         this.descripcion = descripcion;
         this.evaluaciones = new ArrayList<>();
@@ -119,7 +119,7 @@ public class Criterio {
         Scanner sc1 = new Scanner(System.in);
         Concurso concurso_next = Concurso.nextConcurso(sc1);
         
-        Criterio criterio_nuevo=new Criterio(id_next,descripcion_next,idConcurso_next,concurso_next);
+        Criterio criterio_nuevo=new Criterio(id_next,descripcion_next,idConcurso_next);
         return criterio_nuevo;
     }
     
@@ -134,13 +134,13 @@ public class Criterio {
         } 
     }
     
-    public static ArrayList<Concurso> readFromFile(String nomFile){
+    public static ArrayList<Criterio> readFromFile(String nomFile){
         ArrayList<Criterio> lista=new ArrayList<>();
         try(Scanner sc=new Scanner(new File(nomFile))){
             while(sc.hasNextLine()){
                 String linea=sc.nextLine();
                 String[] tokens=linea.split("|");
-                Criterio c=new Criterio(Integer.parseInt(tokens[0]),tokens[1],Integer.parseInt(tokens[2]),tokens[3]);
+                Criterio c=new Criterio(Integer.parseInt(tokens[0]),tokens[1],Integer.parseInt(tokens[2]));
                 lista.add(c);
             }
         }

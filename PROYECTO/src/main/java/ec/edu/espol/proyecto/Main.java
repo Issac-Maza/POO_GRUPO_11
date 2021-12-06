@@ -49,26 +49,26 @@ public class Main {
             }
             if(op==3){
                 System.out.println("Ingresa los datos del concurso");
-//                Concurso c=Concurso.nextConcurso(sc);
-//                c.saveFile("concursos.txt");
+                Concurso c=Concurso.nextConcurso(sc);
+                c.saveFile("concursos.txt");
             }
             if(op==4){
                 System.out.println("Ingresa los datos de los premios");
                 System.out.println("Ingresa la cantidad de premios:");
                 int cantidad=sc.nextInt();
-//                for(int i=0;i<cantidad;i++){
-//                    Premio p=Premio.nextPremio(sc);
-//                    p.saveFile("premios.txt");
-//                }
+                for(int i=0;i<cantidad;i++){
+                    Premio p=Premio.nextPremio(sc);
+                    p.saveFile("premios.txt");
+                }
             }
             if(op==5){
                 System.out.println("Ingresa los datos de los criterios");
                 System.out.println("Ingresa la cantidad de criterios:");
                 int cantidad=sc.nextInt();
-//                for(int i=0;i<cantidad;i++){
-//                    Criterio c=Criterio.nextCriterio(sc);
-//                    c.saveFile("criterios.txt");
-//                }
+                for(int i=0;i<cantidad;i++){
+                    Criterio c=Criterio.nextCriterio(sc);
+                    c.saveFile("criterios.txt");
+                }
             }
             if(op==6){
                 System.out.println("Ingresa los datos de la incripcion");
