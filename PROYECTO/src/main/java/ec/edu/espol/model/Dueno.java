@@ -125,21 +125,22 @@ public class Dueno extends Persona{
     
     public static Dueno nextDueno(Scanner sc){
         sc.useDelimiter("\n");
-        ArrayList<Dueno> lista_d = Dueno.readFromFile("dueño.txt");
-        Persona persona = Persona.nextPersona(sc);
-        int id = lista_d.size()+1;
+        //ArrayList<Dueno> lista_d = Dueno.readFromFile("dueño.txt");
+   
+        //int id = lista_d.size() +1;
+        int id = Util.nextID("dueño.txt");
         System.out.println("El id es:");
         System.out.println(id);
         System.out.println("Ingrese la direccion");
-        String direccion = sc.nextLine();
+        String direccion = sc.next();
         System.out.println("Ingrese el nombres");
-        String nombres = sc.nextLine();
+        String nombres = sc.next();
         System.out.println("Ingrese sus apellidos");
-        String apellidos = sc.nextLine();
+        String apellidos = sc.next();
         System.out.println("Ingrese su telefono ya sea movil o fijo");
-        String telefono = sc.nextLine();
+        String telefono = sc.next();
         System.out.println("Ingrese un email");
-        String email = sc.nextLine();
+        String email = sc.next();
         Dueno duen = new Dueno(id,direccion,nombres,apellidos,telefono,email);
         return duen;
     }

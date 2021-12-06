@@ -6,6 +6,7 @@
 package ec.edu.espol.util;
 
 import ec.edu.espol.model.Concurso;
+import ec.edu.espol.model.Criterio;
 import ec.edu.espol.model.Dueno;
 import ec.edu.espol.model.Inscripcion;
 import ec.edu.espol.model.Mascota;
@@ -55,15 +56,15 @@ public class Util {
     return 0;
     }
     
-    public static Dueno next_Duendueno(Scanner sc){
+    public static Dueno nextDuenoe(Scanner sc){
         
-        System.out.println("Ingrese un email de dueño existente: ");
-        String email = sc.next();
+        System.out.println("Ingrese un correo electrocino de un dueño existente: ");
+        String email = sc.nextLine();
         ArrayList<Dueno> duenos = Dueno.readFromFile("duenos.txt");
-        for (Dueno duen: duenos){
-            if (email.equals(duen.getEmail())){
+        for (Dueno duenito: duenos){
+            if (email.equals(duenito.getEmail())){
                
-                return duen;
+                return duenito;
             }  
         }
         return null; 
@@ -112,7 +113,17 @@ public class Util {
         }
         return null;       
     }
-    
+    public static Criterio IDCriterio(Scanner sc){
+        System.out.println("Ingrese el id del criterio: ");
+        int id= sc.nextInt();
+        ArrayList<Criterio> criterios = Criterio.readFromFile("criterios.txt");
+        for (Criterio subcriterio: criterios){
+            if (id==subcriterio.getId()){
+                return subcriterio;
+            }  
+        }
+    return null;
+    }
+}
  
     
-}

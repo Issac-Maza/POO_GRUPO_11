@@ -145,7 +145,7 @@ public class Mascota {
         LocalDate fechanacimiento = LocalDate.parse(sc.next());
         Dueno dueno;
         do{
-            dueno = Util.next_Duendueno(sc);
+            dueno = Util.nextDuenoe(sc);
         }while(dueno == null);
         Mascota masacota = new Mascota(id, dueno.getId(), nombre, raza, tipo, fechanacimiento);
         ArrayList<Dueno> lista_duenos = Dueno.readFromFile("dueños.txt");
