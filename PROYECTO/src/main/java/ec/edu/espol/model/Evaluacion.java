@@ -112,7 +112,7 @@ public class Evaluacion {
         try(Scanner sc=new Scanner(new File(nomFile))){
             while(sc.hasNextLine()){
                 String linea=sc.nextLine();
-                String[] tokens=linea.split(",");
+                String[] tokens=linea.split("|");
                 Evaluacion e=new Evaluacion(Integer.parseInt(tokens[0]),tokens[1],Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3]),Double.parseDouble(tokens[4]));
                 lista.add(e);
             }
