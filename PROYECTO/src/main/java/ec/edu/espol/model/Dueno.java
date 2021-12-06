@@ -147,13 +147,13 @@ public class Dueno extends Persona{
         System.out.println("Ingrese un email");
         String email = sc.next();
         
-        Dueno duen = new Dueno(id,direccion,nombres,apellidos,telefono,email);
+        Dueno duen = new Dueno(id,nombres,apellidos,telefono,email,direccion);
         return duen;
     }
     
     public void saveFile(String nomFile) {
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile),true))){
-            pw.println(Util.nextID(nomFile)+"|"+this.nombres + "|" + this.apellidos + "|" + this.direccion + "|" + this.telefono + "|" + this.email );
+            pw.println(Util.nextID(nomFile)+"|"+this.nombres + "|" + this.apellidos + "|" + this.telefono + "|" + this.email+"|"+this.direccion );
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
