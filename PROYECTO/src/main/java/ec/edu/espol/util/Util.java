@@ -85,9 +85,9 @@ public class Util {
     System.out.println("Ingrese el nombre del concurso: ");
     String concurso = sc.next();
     ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
-    for (Concurso i: concursos){
-        if (concurso.equals(i.getNombre())){
-            return i.getId();
+    for (Concurso concurs: concursos){
+        if (concurso.equals(concurs.getNombre())){
+            return concurs.getId();
             }  
         }
     return 0;
@@ -95,9 +95,9 @@ public class Util {
     
     public static LocalDate FechaInicio(int id){
         ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
-        for (Concurso i: concursos){
-            if(id==i.getId()){
-                return i.getFechaInscripcion();
+        for (Concurso concurs: concursos){
+            if(id==concurs.getId()){
+                return concurs.getFechaInscripcion();
             }
         }
         return null;       
