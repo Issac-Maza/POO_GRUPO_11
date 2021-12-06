@@ -6,6 +6,7 @@
 package ec.edu.espol.model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -102,6 +103,21 @@ public class Criterio {
         }
         Criterio c=(Criterio)obj;
         return this.id==c.id;
+    }
+    
+    public static Criterio nextCriterio(Scanner sc){
+        System.out.println("Ingrese el ID del Criterio:");
+        int id_next=sc.nextInt();
+        System.out.println("Ingrese la descripcion del Criterio:");
+        String descripcion_next = sc.next();
+        System.out.println("Ingrese el ID del Concurso:");
+        int idConcurso_next = sc.nextInt();
+        
+        Scanner sc1 = new Scanner(System.in);
+        Concurso concurso_next = Concurso.nextConcurso(sc1);
+        
+        Criterio criterio_nuevo=new Criterio(id_next,descripcion_next,idConcurso_next,concurso_next);
+        return criterio_nuevo;
     }
     
 }
