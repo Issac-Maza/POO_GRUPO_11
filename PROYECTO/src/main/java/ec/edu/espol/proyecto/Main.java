@@ -6,6 +6,7 @@
 package ec.edu.espol.proyecto;
 
 import ec.edu.espol.model.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -38,13 +39,13 @@ public class Main {
             op=sc.nextInt();
             if(op==1){
                 System.out.println("Ingresa los datos del dueño");
-                Dueno d=Dueno.nextDueno(sc,"");
+                Dueno d=Dueno.nextDueno(sc);
                 d.saveFile("dueños.txt");
             }
             if(op==2){
                 System.out.println("Ingresa los datos de la mascota");
-//                Mascota m=Mascota.nextMascota(sc);
-//                m.saveFile("mascotas.txt");
+                Mascota m=Mascota.nextMascota(sc);
+                m.saveFile("mascotas.txt");
             }
             if(op==3){
                 System.out.println("Ingresa los datos del concurso");
@@ -71,13 +72,13 @@ public class Main {
             }
             if(op==6){
                 System.out.println("Ingresa los datos de la incripcion");
-//                Inscripcion i=Incripcion.nextInscripcion(sc);
-//                i.saveFile("inscripciones.txt");
+                Inscripcion i=Inscripcion.nextIncripcion(sc);
+                i.saveFile("inscripciones.txt");
             }
             if(op==7){
                 System.out.println("Ingresa los datos del jurado");
                 MiembroJurado mJ=MiembroJurado.nextMiembroJ(sc);
-                mJ.saveFile("miembroJurado.txt");
+                mJ.saveFile("miembroJurados.txt");
             }
             if(op==8){
                 System.out.println("Ingresa los datos de la evaluacion");

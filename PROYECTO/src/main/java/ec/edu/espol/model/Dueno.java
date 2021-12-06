@@ -128,7 +128,7 @@ public class Dueno extends Persona{
         //ArrayList<Dueno> lista_d = Dueno.readFromFile("dueño.txt");
    
         //int id = lista_d.size() +1;
-        int id = Util.nextID("dueño.txt");
+        int id = Util.nextID("dueños.txt");
         System.out.println("El id es:");
         System.out.println(id);
         System.out.println("Ingrese la direccion");

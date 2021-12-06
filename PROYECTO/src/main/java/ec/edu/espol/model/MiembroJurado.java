@@ -47,11 +47,7 @@ public class MiembroJurado extends Persona {
     public String getNombres() {
         return nombres;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     @Override
     public String getApellidos() {
         return apellidos;
@@ -63,19 +59,11 @@ public class MiembroJurado extends Persona {
         return telefono;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String getEmail() {
         return email;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getPerfil() {
         return perfil;
     }
@@ -163,6 +151,7 @@ public class MiembroJurado extends Persona {
     }
         
     public static MiembroJurado nextMiembroJ(Scanner sc){
+        sc.useDelimiter("\n");
         int id=Util.nextID("miembroJurados.txt");
         System.out.println("Nombres");
         String nombres=sc.next();
