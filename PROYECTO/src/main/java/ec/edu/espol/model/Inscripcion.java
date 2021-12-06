@@ -35,6 +35,11 @@ public class Inscripcion {
         this.valor = valor;
         this.fechainscripcion = fechainscripcion;
     }
+    public Inscripcion(int id, LocalDate fecha_inscripcion, double valor) {
+        this.id = id;
+        this.fechainscripcion = fechainscripcion;
+        this.valor = valor;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -150,28 +155,35 @@ public class Inscripcion {
         int idMascotas,idConcurso;
         LocalDate fechainscripcion;
         sc.useDelimiter("\n");
-        ArrayList<Inscripcion> listainscripciones = Inscripcion.readFromFile("inscripciones.txt");   
+        //ArrayList<Inscripcion> listainscripciones = Inscripcion.readFromFile("inscripciones.txt");
+        //int id = listainscripciones.size()+1;;
+        int id = Util.nextID("inscripciones.txt");
         System.out.println("Su id es:");
-        int id = listainscripciones.size()+1;;
         System.out.println(id);
+        
         do{
             System.out.println("Registe el id de la mascota ");
             idMascotas = Util.next_Idmascota(sc);
+            
         }while(idMascotas==0);
         
         do{
             System.out.println("Registe el id del concurso ");
-            idConcurso = Util.nextConcurso(sc);       
+            idConcurso = Util.nextConcurso(sc); 
+            
         }while(idConcurso==0);
         
         do{
             System.out.println("Ingrese la fecha de inscripcion: ");
             fechainscripcion = LocalDate.parse(sc.next());
+            
             }while((fechainscripcion.isBefore(Util.FechaInicio(idConcurso))) || (fechainscripcion.isAfter(Util.FechaFinal(idConcurso))));
+        
         while (idConcurso!= 0 && idMascotas != 0)         
         {         
             System.out.println("Ingrese el costo de la inscripcion: ");
             Double valor = sc.nextDouble();
+            
             Inscripcion nuevo = new Inscripcion(id,idMascotas,idConcurso,valor,fechainscripcion);
             nuevo.saveFile("inscripciones.txt");
             

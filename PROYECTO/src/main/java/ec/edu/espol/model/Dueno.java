@@ -131,16 +131,22 @@ public class Dueno extends Persona{
         int id = Util.nextID("dueño.txt");
         System.out.println("El id es:");
         System.out.println(id);
+        
         System.out.println("Ingrese la direccion");
         String direccion = sc.next();
+        
         System.out.println("Ingrese el nombres");
         String nombres = sc.next();
+        
         System.out.println("Ingrese sus apellidos");
         String apellidos = sc.next();
+        
         System.out.println("Ingrese su telefono ya sea movil o fijo");
         String telefono = sc.next();
+        
         System.out.println("Ingrese un email");
         String email = sc.next();
+        
         Dueno duen = new Dueno(id,direccion,nombres,apellidos,telefono,email);
         return duen;
     }
