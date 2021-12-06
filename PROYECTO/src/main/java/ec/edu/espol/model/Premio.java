@@ -23,7 +23,7 @@ public class Premio {
     private int idConcurso;
     private Concurso concurso;
 
-    public Premio(int id, String lugar, String descripcion, int idConcurso, Concurso concurso) {
+    public Premio(int id, String lugar, String descripcion, int idConcurso) {
         this.id = id;
         this.lugar = lugar;
         this.descripcion = descripcion;
@@ -107,7 +107,7 @@ public class Premio {
         Scanner sc1 = new Scanner(System.in);
         Concurso concurso_next = Concurso.nextConcurso(sc1);
 
-        Premio p=new Premio(id_next,lugar_next,descripcion_next,idConcurso_next,concurso_next);
+        Premio p=new Premio(id_next,lugar_next,descripcion_next,idConcurso_next);
         return p;
     }
     
@@ -128,7 +128,7 @@ public class Premio {
             while(sc.hasNextLine()){
                 String linea=sc.nextLine();
                 String[] tokens=linea.split("|");
-                Premio p=new Premio(Integer.parseInt(tokens[0]),tokens[1],tokens[2],Integer.parseInt(tokens[3])),tokens[4];
+                Premio p=new Premio(Integer.parseInt(tokens[0]),tokens[1],tokens[2],Integer.parseInt(tokens[3]));
                 lista.add(p);
             }
         }
@@ -137,5 +137,5 @@ public class Premio {
         }
         return lista;
     
-    
+    }
 }
