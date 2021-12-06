@@ -5,6 +5,9 @@
  */
 package ec.edu.espol.model;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -118,6 +121,33 @@ public class Criterio {
         
         Criterio criterio_nuevo=new Criterio(id_next,descripcion_next,idConcurso_next,concurso_next);
         return criterio_nuevo;
+    }
+    
+    //files
+    
+    public void saveFile(String nomFile){
+        try(PrintWriter pw=new PrintWriter(new FileOutputStream(new File(nomFile),true))){
+            pw.println(this.toString());
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
+    
+    public static ArrayList<Concurso> readFromFile(String nomFile){
+        ArrayList<Criterio> lista=new ArrayList<>();
+        try(Scanner sc=new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea=sc.nextLine();
+                String[] tokens=linea.split("|");
+                Criterio c=new Criterio(Integer.parseInt(tokens[0]),tokens[1],Integer.parseInt(tokens[2]),tokens[3]);
+                lista.add(c);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return lista;
     }
     
 }

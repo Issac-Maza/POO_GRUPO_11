@@ -7,6 +7,8 @@ package ec.edu.espol.model;
 
 import ec.edu.espol.util.Util;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -201,8 +203,31 @@ public class Concurso {
         return concurso_nuevo;
     }
     
-    //Falta el read from file
+    //files
     
+    public void saveFile(String nomFile){
+        try(PrintWriter pw=new PrintWriter(new FileOutputStream(new File(nomFile),true))){
+            pw.println(this.toString());
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
+    }
     
+    public static ArrayList<Concurso> readFromFile(String nomFile){
+        ArrayList<Concurso> lista=new ArrayList<>();
+        try(Scanner sc=new Scanner(new File(nomFile))){
+            while(sc.hasNextLine()){
+                String linea=sc.nextLine();
+                String[] tokens=linea.split("|");
+                Concurso c=new Concurso(Integer.parseInt(tokens[0]),tokens[1],tokens[2],tokens[3],tokens[4],tokens[5],Double.parseDouble(tokens[6]));
+                lista.add(c);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return lista;
+    }
     
 }
