@@ -200,7 +200,7 @@ public class Mascota {
         }while(dueno == null);
         Mascota masacota = new Mascota(id, dueno.getId(), nombre, raza, tipo, fechanacimiento);
         ArrayList<Dueno> lista_duenos = Dueno.readFromFile("dueños.txt");
-        dueno.saveFile("mascotas.txt");
+//        dueno.saveFile("mascotas.txt");
         return masacota;
     }
 

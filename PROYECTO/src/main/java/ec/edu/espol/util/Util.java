@@ -48,7 +48,7 @@ public class Util {
     System.out.println("Nombre de la mascota: ");
     String nombre_mascota = sc.next();
     
-    ArrayList<Mascota> mascotas = Mascota.readFromFile("concursos.txt");
+    ArrayList<Mascota> mascotas = Mascota.readFromFile("mascotas.txt");
     for (Mascota m: mascotas){
         if (nombre_mascota.equals(m.getNombre())){
             return m.getId();
@@ -61,8 +61,7 @@ public class Util {
         
         System.out.println("Ingrese un correo electrocino de un dueño existente: ");
         String email = sc.next();
-        
-        ArrayList<Dueno> duenos = Dueno.readFromFile("duenos.txt");
+        ArrayList<Dueno> duenos = Dueno.readFromFile("dueños.txt");
         for (Dueno duenito: duenos){
             if (email.equals(duenito.getEmail())){
                
