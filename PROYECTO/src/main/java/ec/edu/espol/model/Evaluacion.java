@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -18,15 +19,19 @@ import java.util.Scanner;
 public class Evaluacion {
     private int id;
     private int idInscripcion;
-    private String eMienbroJurado;
-    private int criterio;
+    private int idMiembroJurado;
+    private int idCriterio;
     private double nota;
 
-    public Evaluacion(int id, int idInscripcion, String eMienbroJurado, int criterio, double nota) {
+    public Evaluacion(int id, String eMiembroJurado, int idInscripcion, int idCriterio, double nota) {
         this.id = id;
         this.idInscripcion = idInscripcion;
-        this.eMienbroJurado = eMienbroJurado;
-        this.criterio = criterio;
+        ArrayList<MiembroJurado> jurados=MiembroJurado.readFromFile("miembroJurados.txt");
+        for(MiembroJurado mJ:jurados){
+            if(mJ.getEmail() == eMiembroJurado)
+                this.idMiembroJurado = mJ.getId();
+        }
+        this.idCriterio = idCriterio;
         this.nota = nota;
     }
 
@@ -38,12 +43,15 @@ public class Evaluacion {
         return idInscripcion;
     }
 
-    public String getEMienbroJurado() {
-        return eMienbroJurado;
+
+
+    public int getIdMiembroJurado() {
+        return idMiembroJurado;
+
     }
 
-    public int getCriterio() {
-        return criterio;
+    public int getIdCriterio() {
+        return idCriterio;
     }
 
     public double getNota() {
@@ -58,12 +66,12 @@ public class Evaluacion {
         this.idInscripcion = idInscripcion;
     }
 
-    public void setIdMienbroJurado(String eMienbroJurado) {
-        this.eMienbroJurado = eMienbroJurado;
+    public void setIdMienbroJurado(int idMiembroJurado) {
+        this.idMiembroJurado = idMiembroJurado;
     }
 
-    public void setCriterio(int criterio) {
-        this.criterio = criterio;
+    public void setIdCriterio(int idCriterio) {
+        this.idCriterio = idCriterio;
     }
 
     public void setNota(double nota) {
@@ -72,7 +80,7 @@ public class Evaluacion {
 
     @Override
     public String toString() {
-        return id + "," + idInscripcion + "," + eMienbroJurado + "," + criterio + "," + nota;
+        return id + "|" + idInscripcion + "|" + idMiembroJurado + "|" + idCriterio + "|" + nota;
     }
 
     @Override
@@ -99,13 +107,13 @@ public class Evaluacion {
         } 
     }
     
-    public static ArrayList<Evaluacion> readFile(String nomFile){
+    public static ArrayList<Evaluacion> readFromFile(String nomFile){
         ArrayList<Evaluacion> lista=new ArrayList<>();
         try(Scanner sc=new Scanner(new File(nomFile))){
             while(sc.hasNextLine()){
                 String linea=sc.nextLine();
-                String[] tokens=linea.split(",");
-                Evaluacion e=new Evaluacion(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],Integer.parseInt(tokens[3]),Double.parseDouble(tokens[4]));
+                String[] tokens=linea.split("|");
+                Evaluacion e=new Evaluacion(Integer.parseInt(tokens[0]),tokens[1],Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3]),Double.parseDouble(tokens[4]));
                 lista.add(e);
             }
         }
@@ -116,17 +124,16 @@ public class Evaluacion {
     }
         
     public static Evaluacion nextEvaluacion(Scanner sc){
-        System.out.println("id");
-        int id=sc.nextInt();
-        System.out.println("id de la inscripcion");
-        int idInscripcion=sc.nextInt();
+        int id=Util.nextID("evaluaciones.txt");
         System.out.println("email del Jurado");
         String eMiembroJurado=sc.next();
-        System.out.println("Criterio");
-        int criterio=sc.nextInt();
+        System.out.println("id de la inscripcion");
+        int idInscripcion=sc.nextInt();
+        System.out.println("id del Criterio");
+        int idCriterio=sc.nextInt();
         System.out.println("Nota");
         double nota=sc.nextDouble();
-        Evaluacion r=new Evaluacion(id,idInscripcion,eMiembroJurado,criterio,nota);
+        Evaluacion r=new Evaluacion(id,eMiembroJurado,idInscripcion,idCriterio,nota);
         return r;
     }
 }

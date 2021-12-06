@@ -135,7 +135,7 @@ public class Concurso {
             sb.append("Inscripcion ");
             sb.append(i.getId());
             sb.append(":<Id de Mascota: ");
-            sb.append(i.getIdMascota());
+            sb.append(i.getIdMascotas());
             sb.append(", Descuento: ");
             sb.append(i.getDescuento());
             sb.append(">, "); 

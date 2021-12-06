@@ -5,7 +5,14 @@
  */
 package ec.edu.espol.util;
 
+import ec.edu.espol.model.Concurso;
+import ec.edu.espol.model.Criterio;
+import ec.edu.espol.model.Dueno;
+import ec.edu.espol.model.Inscripcion;
+import ec.edu.espol.model.Mascota;
 import java.io.File;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -37,4 +44,86 @@ public class Util {
         return id+1;
     }
     
+    public static int next_Idmascota(Scanner sc){
+    System.out.println("Nombre de la mascota: ");
+    String nombre_mascota = sc.nextLine();
+    ArrayList<Mascota> mascotas = Mascota.readFromFile("concursos.txt");
+    for (Mascota m: mascotas){
+        if (nombre_mascota.equals(m.getNombre())){
+            return m.getId();
+            }  
+        }
+    return 0;
+    }
+    
+    public static Dueno nextDuenoe(Scanner sc){
+        
+        System.out.println("Ingrese un correo electrocino de un dueño existente: ");
+        String email = sc.nextLine();
+        ArrayList<Dueno> duenos = Dueno.readFromFile("duenos.txt");
+        for (Dueno duenito: duenos){
+            if (email.equals(duenito.getEmail())){
+               
+                return duenito;
+            }  
+        }
+        return null; 
+    }
+    
+    public static Inscripcion next_Inscripcion(Scanner sc){
+        System.out.println("Ingrese el id de la inscripcion: ");
+        int id= sc.nextInt();
+        ArrayList<Inscripcion> inscripciones = Inscripcion.readFromFile("inscripciones.txt");
+        for (Inscripcion inscritos: inscripciones){
+            if (id==inscritos.getId()){
+                return inscritos;
+            }  
+        }
+    return null;
+    }
+    
+    public static int nextConcurso(Scanner sc){
+    System.out.println("Ingrese el nombre del concurso: ");
+    String concurso = sc.next();
+    ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
+    for (Concurso concurs: concursos){
+        if (concurso.equals(concurs.getNombre())){
+            return concurs.getId();
+            }  
+        }
+    return 0;
+    }
+    
+    public static LocalDate FechaInicio(int id){
+        ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
+        for (Concurso concurs: concursos){
+            if(id==concurs.getId()){
+                return concurs.getFechaInscripcion();
+            }
+        }
+        return null;       
+    }
+    
+    public static LocalDate FechaFinal(int id){
+        ArrayList<Concurso> concursos = Concurso.readFromFile("concursos.txt");
+        for (Concurso i: concursos){
+            if(id==i.getId()){
+                return i.getFechaCierreInscripcion();
+            }
+        }
+        return null;       
+    }
+    public static Criterio IDCriterio(Scanner sc){
+        System.out.println("Ingrese el id del criterio: ");
+        int id= sc.nextInt();
+        ArrayList<Criterio> criterios = Criterio.readFromFile("criterios.txt");
+        for (Criterio subcriterio: criterios){
+            if (id==subcriterio.getId()){
+                return subcriterio;
+            }  
+        }
+    return null;
+    }
 }
+ 
+    
