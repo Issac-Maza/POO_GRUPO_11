@@ -185,13 +185,13 @@ public class Mascota {
         System.out.println(id);
         
         System.out.println("Nombre de la mascota:");
-        String nombre = sc.nextLine();
+        String nombre = sc.next();
         
         System.out.println("Ingrese la raza de su mascota : ");
-        String raza = sc.nextLine();
+        String raza = sc.next();
         
         System.out.println("Tipo de mascota(gato,perro,cocdrilo,serpiente,etc): ");
-        String tipo = sc.nextLine();
+        String tipo = sc.next();
         
         System.out.println("Ingrese la fecha de nacimiento de su mascota");
         System.out.println("Recuerde que la fecha esta en este formato year-month-day ");
@@ -200,7 +200,7 @@ public class Mascota {
         Dueno dueno;
         do{
             dueno = Util.nextDuenoe(sc);
-        }while(dueno == null);
+        }while(dueno != null);
         Mascota masacota = new Mascota(id, dueno.getId(), nombre, raza, tipo, fechanacimiento);
         ArrayList<Dueno> lista_duenos = Dueno.readFromFile("dueños.txt");
         dueno.saveFile("mascotas.txt");
